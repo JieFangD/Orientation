@@ -60,7 +60,6 @@ struct EdgeDetect3x3 {
         }
 			}
 		}
-
 	}
 };
 
