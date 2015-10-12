@@ -7,7 +7,7 @@ using std::vector;
 template <class SignedIntType=int> SignedIntType ClampToUint8(SignedIntType x)
 {
 	const SignedIntType mask = 0xff;
-	return (x&~mask)? ((~x)>>(sizeof(SignedIntType)*8-1) & mask): x;
+  return (x&~mask)? ((~x)>>(sizeof(SignedIntType)*8-1) & mask): x;
 }
 
 struct Convert {
