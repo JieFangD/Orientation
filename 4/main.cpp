@@ -97,14 +97,16 @@ struct RemoveOdd {
 		}
 		return write_index;
 	}
+  struct is_odd{
+    bool operator()(const int& value){return (value%2) == 1;}
+  };
 	int Run_std(int *array, const int n)
 	{
 		// Normally we use lambda if bind is dirty
 		// But practice not to use it (yay)
-	  int *pbegin = array;
-    int *pend = array +n;
-    pend = remove_if(pbegin, pend, [](int i){return i%2;});
-    return pend - pbegin;
+	  int *result;
+    result = remove_if(array, array+n, is_odd());
+    return result - array;
   }
 };
 
@@ -123,9 +125,7 @@ struct IsPrimeLessThan100 {
 	}
 	bool Run_std(const int x)
 	{
-    if(binary_search(table_, table_+table_size_, x))
-      return true;
-    return false;
+    return binary_search(table_, table_+table_size_, x);
 	}
 };
 

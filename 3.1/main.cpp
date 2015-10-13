@@ -10,10 +10,10 @@ public:
 	inline float Init(const float a)
   {
     a_half_ = a / 2;
-    if(a > 1)
-      x_ = 2 / a;
-    else
-      x_ = 0.5 / a;
+    x_ = 0;
+    while(x_*x_ < 1/a){
+      x_ += 0.1;
+    }
   }
 	inline float get_x() {return x_;}
 
