@@ -6,6 +6,7 @@ template <class SignedIntType=int> SignedIntType ClampToUint8(SignedIntType x)
 
 因為我們想要限制return的值在0~255，所以要用一個mask，也就是11111111的數字，來跟我們傳入的數字做and運算。
 x&~mask這項可以判斷我們傳入的數字是否大於255，若是小於等於255的話，這項結果就會為0，就直接回傳x。
-若大於255，x&~mask這項的結果則會大於0，因此會回傳((~x)>>(sizeof(SignedIntType)*8-1) & mask)，
-因為x是有號數，所以MSB會是0，經過反向再右移就會將全部的位元都補上1，最後跟mask做and運算就會得到255。
+若大於255或小於0，x&~mask這項的結果則會不等於0，因此會回傳((~x)>>(sizeof(SignedIntType)*8-1) & mask)，
+因為x是有號數，若大於等於0的情況，MSB會是0，經過反向再右移就會將全部的位元都補上1，最後跟mask做and運算就會得到255；
+若是小於0的情況，MSB會是1，經過反向再右移就會將全部的位元都補上0，最後跟mask做and運算就會得到0。
 
