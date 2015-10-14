@@ -28,6 +28,11 @@ struct MyFunctionClass {
 	}
 };
 
+float calc(float& a, float& b, float& c){
+  return a-b*c;
+}
+    
+
 template <class FunctionType>
 class OptimizationDriver {
 	typedef typename FunctionType::VectorType VectorType;
@@ -48,8 +53,7 @@ public:
 	void RunIterate()
 	{
 		auto gradient = f_(v_);
-    std::transform(gradient.begin(), gradient.end(), gradient.begin(), std::bind1st(std::multiplies<ValueType>(),mu_));
-    std::transform (v_.begin(), v_.end(), gradient.begin(), v_.begin(), std::minus<ValueType>());
+    std::transform (v_.begin(), v_.end(), gradient.begin(), v_.begin(), bind(calc, _1, _2, mu_));
     // TODO: v -= ug
 		// use std::transform, bind, minus, _1, _2, multiplies
 		// You can do it in one function call!
