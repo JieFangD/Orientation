@@ -40,6 +40,8 @@ struct IntToFloat {
 	}
 };
 
+int divi(int x, int y){return (x+y)/2;}
+
 struct CalculateCarry {
 	int Run(const int *a, const int *b, const int n)
 	{
@@ -55,15 +57,7 @@ struct CalculateCarry {
 	{
 		// Normally we use lambda if bind is dirty
 		// But practice not to use it (yay)
-    int c[n];
-    transform(a, a+n, b, c, plus<int>());
-    for(int i = 0; i < n-1; i++){
-      if(*(c+i) >= 2)
-        *(c+i+1) += 1;
-    }
-    if(*(c+n-1) >= 2)
-      return 1;
-    return 0;
+    return inner_product(a, a+n, b, 0, divi, plus<int>());
 	}
 };
 
@@ -125,7 +119,7 @@ struct IsPrimeLessThan100 {
 	}
 	bool Run_std(const int x)
 	{
-    return binary_search(table_, table_+table_size_, x);
+    binary_search(table_, table_+table_size_, x);
 	}
 };
 
@@ -163,8 +157,7 @@ struct VectorSum {
 	}
 	int Run_std(const int *array, const int n)
 	{
-    int sum = 0;
-    return accumulate(array, array+n, sum);
+    accumulate(array+1, array+n, *array);
 	}
 };
 
@@ -180,9 +173,7 @@ struct AllNonzero {
 	}
 	bool Run_std(const int *array, const int n)
 	{
-    if(all_of(array, array+n, [](int i){return i!=0;}))
-      return true;
-    return false;
+    all_of(array, array+n, [](int i){return i!=0;});
 	}
 };
 
