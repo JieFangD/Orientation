@@ -119,7 +119,7 @@ struct IsPrimeLessThan100 {
 	}
 	bool Run_std(const int x)
 	{
-    binary_search(table_, table_+table_size_, x);
+    return binary_search(table_, table_+table_size_, x);
 	}
 };
 
@@ -157,7 +157,7 @@ struct VectorSum {
 	}
 	int Run_std(const int *array, const int n)
 	{
-    accumulate(array+1, array+n, *array);
+    return accumulate(array+1, array+n, *array);
 	}
 };
 
@@ -173,7 +173,7 @@ struct AllNonzero {
 	}
 	bool Run_std(const int *array, const int n)
 	{
-    all_of(array, array+n, [](int i){return i!=0;});
+    return all_of(array, array+n, [](int i){return i!=0;});
 	}
 };
 
